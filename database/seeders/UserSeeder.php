@@ -92,7 +92,7 @@ class UserSeeder extends Seeder
         }
 
         $this->command->info('✓ 5 usuarios creados (1 admin + 4 usuarios de prueba)');
-        $this->command->info('  Admin: ccdiego.ve@gmail.com | Password: GodAleGO##85');
+        $this->command->info('  Admin: ccdiego.ve@gmail.com | Password: [CONFIGURADA EN SEEDER]');
         $this->command->info('  Test users: john@example.com, jane@example.com, bob@example.com, alice@example.com | Password: password');
     }
 }

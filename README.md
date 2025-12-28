@@ -69,6 +69,17 @@ This project was developed using **Cursor IDE** with **Claude Sonnet 4.5**, leve
 - Proper foreign key relationships
 - Soft deletes where appropriate
 
+### 📧 Jobs & Automation
+- **Low Stock Notification:** Automated email alerts when product inventory is low
+  - Triggered after checkout when stock <= threshold
+  - Uses Laravel Queue for async processing
+  - Sends detailed email to admin with product information
+- **Daily Sales Report:** Automated end-of-day sales summary
+  - Runs every evening at 11:30 PM via Laravel Scheduler
+  - Comprehensive statistics (orders, revenue, products sold)
+  - Detailed breakdown of all daily transactions
+  - Sends formatted HTML email to admin
+
 ---
 
 ## 🏗️ Technology Stack
@@ -161,7 +172,7 @@ php artisan db:seed
 
 **Default Admin Credentials:**
 - **Email:** ccdiego.ve@gmail.com
-- **Password:** GodAleGO##85
+- **Password:** [Ver database/seeders/UserSeeder.php]
 
 **Test User Credentials:**
 - **Email:** john@example.com, jane@example.com, bob@example.com, alice@example.com
@@ -192,6 +203,22 @@ php artisan serve
 
 # In another terminal, start Vite (if using npm run dev)
 npm run dev
+
+# In another terminal, start Queue Worker (for low stock notifications)
+php artisan queue:work
+
+# OPTIONAL: In another terminal, start Scheduler (for daily sales report)
+php artisan schedule:work
+```
+
+**Note:** For production, use:
+- Supervisor or similar to manage `queue:work`
+- Cron job for `schedule:run` (see below)
+
+**Production Cron Setup:**
+```bash
+# Add to crontab (crontab -e):
+* * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1
 ```
 
 ### 9. Access the Application
@@ -550,18 +577,21 @@ This project demonstrates:
 
 ---
 
+## ✅ Completed Features
+
+- [x] **Low stock notification job (Laravel Queue)** - Automated email alerts when inventory is low
+- [x] **Daily sales report (Laravel Scheduler)** - End-of-day sales summary sent to admin
+
 ## 📦 Future Enhancements
 
-- [ ] Low stock notification job (Laravel Queue)
-- [ ] Daily sales report (Laravel Scheduler)
 - [ ] Admin dashboard for product management
 - [ ] Order tracking and status updates
-- [ ] Email notifications for orders
+- [ ] Real-time email notifications for orders (beyond daily reports)
 - [ ] Product reviews and ratings
 - [ ] Wishlist functionality
-- [ ] Payment gateway integration
-- [ ] Inventory management
-- [ ] Sales analytics and reporting
+- [ ] Payment gateway integration (Stripe/PayPal)
+- [ ] Advanced inventory management
+- [ ] Sales analytics dashboard with charts
 
 ---
 
