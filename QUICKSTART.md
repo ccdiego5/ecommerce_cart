@@ -59,6 +59,12 @@ php artisan serve
 
 # Terminal 2: Vite (assets)
 npm run dev
+
+# Terminal 3: Queue Worker (for low stock notifications)
+php artisan queue:work
+
+# Terminal 4 (optional): Scheduler (for daily sales report)
+php artisan schedule:work
 ```
 
 ### 6. Access Application
@@ -70,7 +76,7 @@ Open browser: **http://127.0.0.1:8000**
 
 ### Admin User
 - **Email:** ccdiego.ve@gmail.com
-- **Password:** GodAleGO##85
+- **Password:** [Ver database/seeders/UserSeeder.php]
 
 ### Customer Users
 - **Email:** john@example.com

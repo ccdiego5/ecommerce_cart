@@ -1,0 +1,65 @@
+# ========================================
+# 🚀 COMANDOS PARA PUSH A GITHUB
+# ========================================
+#
+# ✅ El commit inicial ya está creado
+# ✅ 150 archivos listos para push
+# ✅ 23,683 líneas de código
+#
+# Ahora ejecuta estos comandos en orden:
+# ========================================
+
+# 1. Agregar el repositorio remoto de GitHub
+git remote add origin https://github.com/ccdiego5/ecommerce_cart.git
+
+# 2. Renombrar la rama a 'main'
+git branch -M main
+
+# 3. Push al repositorio de GitHub
+git push -u origin main
+
+# ========================================
+# ✅ ¡LISTO!
+# ========================================
+#
+# Después del push, ve a:
+# https://github.com/ccdiego5/ecommerce_cart
+#
+# Verifica que todo esté correcto:
+# - README.md se vea bien
+# - Dylan tenga acceso (@dylanmichaelryan)
+# - .env NO esté en el repositorio (por seguridad)
+# - Todos los archivos estén presentes
+#
+# ========================================
+# 📋 ESTADO ACTUAL
+# ========================================
+#
+# Commit: 17d405a
+# Mensaje: "Initial commit: E-commerce shopping cart system"
+# Archivos: 150 files
+# Líneas: 23,683 insertions
+# Rama: master → main (al hacer push)
+#
+# ========================================
+# SI ALGO SALE MAL
+# ========================================
+#
+# Si el remote ya existe:
+git remote remove origin
+git remote add origin https://github.com/ccdiego5/ecommerce_cart.git
+
+# Si hay conflictos:
+git pull origin main --allow-unrelated-histories
+git push -u origin main
+
+# Verificar remote:
+git remote -v
+
+# Ver último commit:
+git log --oneline -1
+
+# ========================================
+# 🎉 ¡TODO LISTO PARA GITHUB!
+# ========================================
+
