@@ -88,4 +88,59 @@ class Order extends Model
         
         return "ORD-{$year}-{$number}";
     }
+
+    /**
+     * Get today's completed sales orders.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public static function getTodaySales()
+    {
+        return self::with(['orderItems', 'user'])
+            ->whereDate('completed_at', today())
+            ->where('status', 'completed')
+            ->orderBy('completed_at', 'desc')
+            ->get();
+    }
+
+    /**
+     * Get today's sales statistics.
+     *
+     * @return array
+     */
+    public static function getTodaySalesStats(): array
+    {
+        $orders = self::getTodaySales();
+        
+        $totalProducts = 0;
+        $productsSummary = [];
+        
+        foreach ($orders as $order) {
+            foreach ($order->orderItems as $item) {
+                $totalProducts += $item->quantity;
+                
+                $productName = $item->product_name;
+                if (!isset($productsSummary[$productName])) {
+                    $productsSummary[$productName] = [
+                        'product_name' => $productName,
+                        'quantity' => 0,
+                        'price' => $item->price,
+                        'total' => 0,
+                    ];
+                }
+                
+                $productsSummary[$productName]['quantity'] += $item->quantity;
+                $productsSummary[$productName]['total'] += $item->quantity * $item->price;
+            }
+        }
+        
+        return [
+            'date' => today()->format('F j, Y'),
+            'total_orders' => $orders->count(),
+            'total_revenue' => $orders->sum('total_amount'),
+            'total_products_sold' => $totalProducts,
+            'orders' => $orders,
+            'products_summary' => array_values($productsSummary),
+        ];
+    }
 }

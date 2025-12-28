@@ -217,9 +217,12 @@ class ShoppingCart extends Component
                 // Reducir stock
                 $product->decrement('stock_quantity', $cartItem->quantity);
 
-                // TODO: Disparar Job de Low Stock si es necesario
+                // Refrescar el producto para obtener el stock actualizado
+                $product->refresh();
+
+                // Disparar Job de Low Stock si es necesario
                 if ($product->isLowStock()) {
-                    // LowStockNotificationJob::dispatch($product);
+                    \App\Jobs\SendLowStockNotification::dispatch($product);
                 }
             }
 
